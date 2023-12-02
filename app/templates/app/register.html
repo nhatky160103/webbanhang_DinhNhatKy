@@ -1,0 +1,130 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block register %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register New Member</title>
+    <!-- Thêm thư viện Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('{% static "app/images/back_ground2.jpg" %}');
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 500px;
+            margin-top: 40px;
+            margin-bottom: 60px
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 0;
+            border-color: #dcdcdc;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>Register New Member</h3>
+            </div>
+            <div class="card-body ">
+                <img src="{% static 'app/images/login_img.png' %}" alt="Shoe Image" class="img-fluid">
+                <form style="color: white;" action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    <div  class="form-group">
+                        <i  class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        {{ rF.username.label_tag }}
+                        {{ rF.username }}
+                    </div>
+                    <div  class="form-group">
+                        <i  class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        {{ rF.email.label_tag }}
+                        {{ rF.email }}
+                    </div>
+                    <div   class="form-group">
+                        <i   class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        {{ rF.first_name.label_tag }}
+                        {{ rF.first_name }}
+                    </div>
+                    <div  class="form-group">
+                        <i  class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        {{ rF.last_name.label_tag }}
+                        {{ rF.last_name }}
+                    </div>
+                    <div  class="form-group">
+                        <i  class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        {{ rF.password1.label_tag }}
+                        {{ rF.password1 }}
+                    </div>
+                    <div  class="form-group">
+                        <i  class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        {{ rF.password2.label_tag }}
+                        {{ rF.password2 }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="d-flex justify-content-center links">
+                        You had an account? <a href={% url 'login' %}> Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thêm thư viện Bootstrap JavaScript (tùy chọn) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pzjw8h+18zTt4O8RW2CEYsstE9JOX9fDjqc2i0u8Rzr3Gc/O4e6br5uMhDz0xIvA"
+        crossorigin="anonymous"></script>
+{% endblock register %}
+</body>
+
+</html>

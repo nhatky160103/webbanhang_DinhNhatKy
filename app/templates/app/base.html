@@ -11,104 +11,175 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--css-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link href-"{% static 'app/css/style.css' %}"rel= "stylesheet"/>
-        <link href-"{% static 'app/css/owl.carousel.min.css' %}"rel= "stylesheet"/>
-        <link href-"{% static 'app/css/all.min.css' %}"rel= "stylesheet"/>
+        <link href-"{% static 'app/css/style.css' %}" rel="stylesheet"/>
+        <link href-"{% static 'app/css/owl.carousel.min.css' %}" rel="stylesheet"/>
+        <link href-"{% static 'app/css/all.min.css' %} "rel="stylesheet"/>
 
         <link rel="stylesheet" type="text/css" href="{% static 'app/css/main.css' %}">
         <!--js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha512-AFwxAkWdvxRd9qhYYp1qbeRZj6/iTNmJ2GFwcxsMOzwwTaRwz2a/2TX225Ebcj3whXte1WGQb38cXE5j7ZQw3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
         <script src="{% static 'app/js/all.min.js' %}"></script>
         <script src="{% static 'app/js/myscript.js' %}"></script>
         <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
-        <title>bảy khó quán</title>
+        <script type="text/javascript">
+          var user ='{{request.user}}'
+          function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+        </script>
+        <title>Men's shoes</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+       
+     
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="{% url 'home' %}">
-                <img src = "{% static 'app/images/banner/logo.jpg' %}" width="60" height= "60"/>
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-                  </li>
-                  
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                       Sản phẩm
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">cơm tấm</a></li>
-                      <li><a class="dropdown-item" href="#">cơm rang</a></li>
-                      <li><a class="dropdown-item" href="#">bún đậu</a></li>
-                      <li><a class="dropdown-item" href="#">nem nướng</a></li>
-                      <li><a class="dropdown-item" href="#">bún bò Huế</a></li>
-                      <li><a class="dropdown-item" href="#">bún cá</a></li>
-                      <li><a class="dropdown-item" href="#">cơm thố</a></li>
-                      <li><a class="dropdown-item" href="#">mì trộn</a></li> 
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">bánh mì</a></li>
-                      <li><a class="dropdown-item" href="#">nước giải khát</a></li>
-                      <li><a class="dropdown-item" href="#">bia</a></li>
-                      <li><a class="dropdown-item" href="#">khoai tây chiên</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link " href="#">Giới thiệu</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Liên hệ</a>
-                  </li>
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          
+          <a class="navbar-brand" href="{%url 'home'%}">
+            <img src="{% static 'app/images/banner/logo.jpg'%}" alt="#" width="60" height ="50">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                
+                <a class="nav-link active" aria-current="page" href="{%url 'home'%}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                </svg> HOME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
+                  <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
+                  <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/>
+                </svg> LINK</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16">
+                    <path d="M1.333 2.667C1.333 1.194 4.318 0 8 0s6.667 1.194 6.667 2.667V4c0 1.473-2.985 2.667-6.667 2.667S1.333 5.473 1.333 4V2.667z"/>
+                    <path d="M1.333 6.334v3C1.333 10.805 4.318 12 8 12s6.667-1.194 6.667-2.667V6.334a6.51 6.51 0 0 1-1.458.79C11.81 7.684 9.967 8 8 8c-1.966 0-3.809-.317-5.208-.876a6.508 6.508 0 0 1-1.458-.79z"/>
+                    <path d="M14.667 11.668a6.51 6.51 0 0 1-1.458.789c-1.4.56-3.242.876-5.21.876-1.966 0-3.809-.316-5.208-.876a6.51 6.51 0 0 1-1.458-.79v1.666C1.333 14.806 4.318 16 8 16s6.667-1.194 6.667-2.667z"/>
+                  </svg>
+                  PRODUCT
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">giày chạy bộ</a></li>
+                  <li><a class="dropdown-item" href="#">giày bóng đá</a></li>
+                  <li><a class="dropdown-item" href="#">giày thời trang</a></li>
+                  <li><a class="dropdown-item" href="#">giày bóng chuyền</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">tất</a></li>
+                  <li><a class="dropdown-item" href="#">lót giày</a></li>
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-              </div>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    user1
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">order </a></li>
-                    <li><a class="dropdown-item" href="#">account</a></li>
-                    <li><a class="dropdown-item" href="#">nạp vip</a></li>
-                    <li><a class="dropdown-item" href="#">exit</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link " href="{% url 'cart' %}">GIỎ HÀNG</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link " href="#">ĐĂNG NHẬP</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link " href="#">ĐĂNG KÝ</a>
-                </li>
-              </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                </svg> ABOUT</a>
+              </li>
+              <li class="nav-item">
+
+                <a class="nav-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                  <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                </svg> CONTACT</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search" method POST action="{%url 'search'%}">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_id">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div>
+              <span>{{request.user}}</span>
+              <span><a href="{% url 'logout' %}">LOGOUT</a></span>
             </div>
-          </nav>
-        <!--main body-->
-        {%block banner_slider%}{%endblock banner_slider%}
-        {% block main-content  %}{% endblock main-content %}
-        <!--GIAO DIỆN CART-->
-        {% block cart_content %}{% endblock cart_content %}
-        <!--giao diện checkout-->
-        {% block content_checkout %}{% endblock content_checkout %}
-        <footer class ="container--fluid bg-success text-center fixed-bottom p-2 mt-5">
-            copyright 2023
-        </footer>
-    </body>
+            {% comment %} <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+                USER
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">ACCOUNT</a></li>
+                <li><a class="dropdown-item" href="#">ORDER</a></li>
+                <li><a class="dropdown-item" href="#">EXIT</a></li>
+                
+              </ul>
+            </li> {% endcomment %}
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lock" viewBox="0 0 16 16">
+                <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 5.996V14H3s-1 0-1-1 1-4 6-4c.564 0 1.077.038 1.544.107a4.524 4.524 0 0 0-.803.918A10.46 10.46 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
+              </svg> LOGIN</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
+                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+              </svg> REGISTER</a>
+            </li>
+          </ul>
+          <div class="form-inline my-2 my-lg-0">
+            <a href="{% url 'cart'%}" class="mr-2">
+              <img id="cart-icon" src="{% static 'app/images/cart.png' %}">
+            </a>
+            <p style= "float: right; margin-right: 5px;" id='cart-total'>{{cartItems}}</p>
+          </div>
+        </div>
+      </nav>
+      
+
+      <!--main body-->
+      {%block banner_slider%}{%endblock banner_slider%}
+      {% block main-content  %}{% endblock main-content %}
+      <!--GIAO DIỆN CART-->
+      {% block cart_content %}{% endblock cart_content %}
+      <!--giao diện checkout-->
+      {% block content_checkout %}{% endblock content_checkout %}
+       <!--giao diện dang ky-->
+      {% block register %}{% endblock register %}
+       <!--giao diện dang nhap-->
+      {% block login %}{% endblock login %}
+        <!--giao diện tim kiem-->
+      {% block search %}{% endblock search %}
+      
+      <footer class ="container--fluid bg-success text-center fixed-bottom p-2 mt-5">
+        <p class="footer_home text-white">© 2023 Men's Shoes. Tất cả các quyền được bảo lưu.Quốc gia và Khu vực:
+          Singapore
+          Indonesia
+          Đài Loan
+          Thái Lan
+          Malaysia
+          Việt Nam
+          Philippines
+          </p>
+      </footer>
+      <script src="{% static 'app/js/cart.js' %}"></script>
+  </body>
 </html>
