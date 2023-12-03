@@ -68,12 +68,6 @@
                   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                 </svg> HOME</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
-                  <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
-                  <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6z"/>
-                </svg> LINK</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-server" viewBox="0 0 16 16">
@@ -84,13 +78,9 @@
                   PRODUCT
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">giày chạy bộ</a></li>
-                  <li><a class="dropdown-item" href="#">giày bóng đá</a></li>
-                  <li><a class="dropdown-item" href="#">giày thời trang</a></li>
-                  <li><a class="dropdown-item" href="#">giày bóng chuyền</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">tất</a></li>
-                  <li><a class="dropdown-item" href="#">lót giày</a></li>
+                  {% for category  in categories %}
+                    <li><a class="dropdown-item" href="{% url 'category' %}?category={{category.slug}}">{{category.name}}</a></li>
+                  {% endfor %}
                 </ul>
               </li>
               <li class="nav-item">
@@ -106,45 +96,34 @@
                 </svg> CONTACT</a>
               </li>
             </ul>
-            <form class="d-flex" role="search" method POST action="{%url 'search'%}">
+            <form class="d-flex" role="search" method="POST" action="{% url 'search'%}">
               {% csrf_token %}
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_id">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style ="display:{{user_login}}">
             <div>
-              <span>{{request.user}}</span>
-              <span><a href="{% url 'logout' %}">LOGOUT</a></span>
+              <img src="{% static 'app/images/avarta.jpg' %}" alt="User" style="margin-left:10px;width: 50px; height: 40px; border-radius: 50%;vertical-align: middle">
+              <span style="text-transform: uppercase; font-weight: bold;">{{ request.user }}</span>
+              <span style="margin-left:10px;"class="btn btn-danger text-uppercase mr-2 px-4"><a style="text-decoration: none;" href="{% url 'logout' %}">LOGOUT</a></span>
             </div>
-            {% comment %} <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-                USER
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">ACCOUNT</a></li>
-                <li><a class="dropdown-item" href="#">ORDER</a></li>
-                <li><a class="dropdown-item" href="#">EXIT</a></li>
-                
-              </ul>
-            </li> {% endcomment %}
-            
+          </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style ="display:{{user_not_login}}">
             <li class="nav-item">
-              <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lock" viewBox="0 0 16 16">
+              <a class="nav-link" href="{%url 'login'%}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lock" viewBox="0 0 16 16">
                 <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 5.996V14H3s-1 0-1-1 1-4 6-4c.564 0 1.077.038 1.544.107a4.524 4.524 0 0 0-.803.918A10.46 10.46 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664zM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1"/>
               </svg> LOGIN</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+              <a class="nav-link" href="{%url 'register'%}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
                 <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z"/>
                 <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
               </svg> REGISTER</a>
             </li>
           </ul>
+
+
           <div class="form-inline my-2 my-lg-0">
             <a href="{% url 'cart'%}" class="mr-2">
               <img id="cart-icon" src="{% static 'app/images/cart.png' %}">
@@ -168,6 +147,8 @@
       {% block login %}{% endblock login %}
         <!--giao diện tim kiem-->
       {% block search %}{% endblock search %}
+        <!--giao diện view-->
+      {% block detail %}{% endblock detail %}
       
       <footer class ="container--fluid bg-success text-center fixed-bottom p-2 mt-5">
         <p class="footer_home text-white">© 2023 Men's Shoes. Tất cả các quyền được bảo lưu.Quốc gia và Khu vực:
