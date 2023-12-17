@@ -173,10 +173,12 @@ def checkout(request):
         order = {'get_cart_items':0, 'get_cart_total':0}
         user_not_login = "show"
         user_login= "none"
+        
     categories = Category.objects.filter(is_sub= False)
     active_category= request.GET.get('category','')
     context= {'categories':categories, 'active_category':active_category,'items':items,'order':order,'cartItems':cartItems, 'user_not_login':user_not_login,'user_login':user_login}#tao mot tu dien den html
     return render(request,'app/checkout.html',context)
+
 def updateItem(request):
     data =json.loads(request.body)
     productId =data['productId']
