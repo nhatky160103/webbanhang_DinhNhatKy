@@ -12,8 +12,6 @@ class loginUserForm(UserCreationForm):
         model =User
         fields=['username','password1']
 
-
-
 # class Customer(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.SET_NULL, null= True,blank=False)
 #     name = models.CharField( max_length=200, null = True)
@@ -42,7 +40,6 @@ class Product(models.Model):
     detail= models.TextField(null=True, blank=True)
     def __str__(self) :
         return self.name
-
     @property
     def ImageURL(self):
         try:
