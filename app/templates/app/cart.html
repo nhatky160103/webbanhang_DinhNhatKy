@@ -26,21 +26,29 @@
 			<div class="cart-row">
 				<div style="flex:2"></div>
 				<div style="flex:2"><strong>Item</strong></div>
+				<div style="flex:2"><strong>Size</strong></div>
+				<div style="flex:2"><strong>Color</strong></div>
 				<div style="flex:1"><strong>Price</strong></div>
 				<div style="flex:1"><strong>Quantity</strong></div>
 				<div style="flex:1"><strong>Total</strong></div>
 			</div>
 			{% for item in items %} 
 			<div class="cart-row">
-				<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
-				<div style="flex:2"><p>{{item.product.name}}</p></div>
-				<div style="flex:1"><p>{{item.product.price}}</p></div>
+				<div style="flex:2"><img class="row-image" src="{{item.productvariant.ImageURL}}"></div>
+				<div style="flex:2"><p>{{item.productvariant.name}}</p></div>
+				<div style="flex:2"><p>{{item.productvariant.size}}</p></div>
+				<div style="flex:2; display: flex; align-items: center;">
+					<p style="margin-right:10px;border-radius:2px;width: 25px;;height:15px;background-color:{{item.productvariant.color.color_id}}"></p>
+					<p>{{item.productvariant.color}}</p> 
+					
+				</div>
+				<div style="flex:1"><p>{{item.productvariant.price}}</p></div>
 				<div style="flex:1">
 					<p class="quantity">{{item.quantity}}</p>
 					<div class="quantity">
-						<img data-product ={{item.product.id}} data-action = 'add' class="chg-quantity update-cart" src="{% static  'app/images/arrow-up.png' %}">
+						<img data-productvariant ={{item.productvariant.id}} data-action = 'add' class="chg-quantity update-cart" src="{% static  'app/images/arrow-up.png' %}">
 			
-						<img data-product ={{item.product.id}} data-action = 'remove' class="chg-quantity update-cart" src="{% static  'app/images/arrow-down.png' %}">
+						<img data-productvariant ={{item.productvariant.id}} data-action = 'remove' class="chg-quantity update-cart" src="{% static  'app/images/arrow-down.png' %}">
 					</div>
 				</div>
 				<div style="flex:1"><p>{{item.get_total}}</p></div>
@@ -50,4 +58,44 @@
 		</div>
 	</div>
 </div>
+<script>
+	var updateBtns=document.getElementsByClassName('update-cart')
+	for (i=0;i< updateBtns.length;i++){
+		updateBtns[i].addEventListener('click', function(){
+			var productvariant_id = this.dataset.productvariant
+			var action = this.dataset.action
+			console.log('productvariant_id',productvariant_id, 'action', action)
+			console.log('user: ',user)
+			if (user ==="AnonymousUser"){
+				console.log('user not login')
+			}
+			else{
+				updateUserOrder(productvariant_id,action)
+			}
+
+		})
+	}
+
+	function updateUserOrder(productvariant_id, action){
+		console.log('user logged in, success da thay doi')
+		var url = '/update_item/'
+		fetch(url,{
+			method : 'POST',
+			headers : {
+				'Content-Type':'application/json',
+				'X-CSRFToken':csrftoken
+
+			},
+			body: JSON.stringify({'productvariant_id':productvariant_id, 'action':action})
+		})
+		.then((response) =>{
+			return response.json() 
+		})
+		.then((data)=>{
+			console.log('data',data)
+			location.reload()
+		})
+	
+	}
+</script>
 {% endblock cart_content %}

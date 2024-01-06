@@ -12,48 +12,15 @@
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
         </div>
         <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="10000">
-            <img src="{%static 'app/images/slider1.jpeg'%}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
-            <h5 class="text-white">First slide label</h5>
-            <p>Bền bỉ</p>
+          {% for product in products_slider  %}
+            <div class="carousel-item {%  if forloop.first %}active{% endif %}" data-bs-interval="10000">
+              <img src="{{product.ImageURL}}" class="d-block w-100" alt="...">
+              <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
+              <h5 class="text-white">{{product.name}}</h5>
+              <p>{{product.detail}}</p>
+              </div>
             </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="2000">
-            <img src="{%static 'app/images/slider2.jpg'%}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
-            <h5 class="text-white">Second slide label</h5>
-            <p>đẹp mắt</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{%static 'app/images/slider3.jpeg'%}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
-            <h5 class="text-white">Third slide label</h5>
-            <p>thời trang</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{%static 'app/images/slider4.jpeg'%}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
-            <h5 class="text-white">Third slide label</h5>
-            <p>hàng hiệu</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{%static 'app/images/slider5.jpeg'%}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
-            <h5 class="text-white">Third slide label</h5>
-            <p>bảo đảm sức khỏe</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{%static 'app/images/slider6.jpg'%}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
-            <h5 class="text-white">Third slide label</h5>
-            <p>đáng giá tiền</p>
-            </div>
-        </div>
+          {% endfor %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -67,10 +34,7 @@
 
 {%endblock banner_slider%}
 
-
-
 {%block main-content%}
-
 <div class="row" style="width:100%">
   {%for product in products %}
   <div class="col-lg-3">
@@ -78,9 +42,12 @@
     <div class="box-element product">
       <h6>{{product.name}}</h6>
       <hr>
-      <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add cart</button>
+        <button data-product={{product.id}} class="btn btn-outline-secondary add-btn update-cart">
+          <a style="text-decoration:none" href="{% url 'detail'%}?id={{product.id}}">Buy</a>
+        </button>
+      
       <a class="btn btn-outline-success" href="{% url 'detail'%}?id={{product.id}}">View</a>
-      <h4 style="display: inline-block; float: right"><strong>{{product.price | floatformat:2}}$</strong></h4>
+      <h4 style="display: inline-block; float: right"><strong>{{product.price_avg | floatformat:2}}$</strong></h4>
     </div>
   </div>  
   {% endfor %}  

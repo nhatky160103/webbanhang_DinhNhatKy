@@ -12,4 +12,8 @@ urlpatterns = [
     path('search/', views.search, name="search"),
     path('category/', views.category, name="category"),
     path('detail/', views.detail, name="detail"),
+    path('contact/', views.contact_view, name="contact"),
+    path('save_shipping_address/', views.save_shipping_address, name="save_shipping_address"),
+    path('productvariant_api/',views.ProductvariantAPI.as_view(), name ="productvariant_api"),
+   
 ]

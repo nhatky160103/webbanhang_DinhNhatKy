@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'webbanhang.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'web_ban_hang',
+        'NAME': 'web_ban_hang2',
         "USER": 'root',
         "PASSWORD": '',
         "HOST": 'localhost',
@@ -124,6 +125,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -133,3 +135,5 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL ='/images/'
 MEDIA_ROOT=  os.path.join(BASE_DIR,'app/static/images')
+
+

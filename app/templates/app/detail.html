@@ -3,29 +3,31 @@
 
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-      body{background-color: #000}.card{border:none}.product{background-color: #eee}.brand{font-size: 13px}.act-price{color:red;font-weight: 700}.dis-price{text-decoration: line-through}.about{font-size: 14px}.color{margin-bottom:10px}label.radio{cursor: pointer}label.radio input{position: absolute;top: 0;left: 0;visibility: hidden;pointer-events: none}label.radio span{padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase}label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;color: #fff}.btn-danger{background-color: #ff0000 !important;border-color: #ff0000 !important}.btn-danger:hover{background-color: #da0606 !important;border-color: #da0606 !important}.btn-danger:focus{box-shadow: none}.cart i{margin-right: 10px}
-    </style>
+   
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-    {% block detail  %}
-    {% for product in products %}
+ 
 
+    {% block detail  %}
   
     <div class="container mt-5 mb-5">
       <div class="row d-flex justify-content-center">
           <div class="col-md-10">
-              <div class="card">
+              <div class="card" >
                   <div class="row">
                       <div class="col-md-6">
                           <div class="images p-3">
-                              <div class="text-center p-4"> <img id="main-image" src="{{product.ImageURL}}" width="450" /> </div>
-                              <div class="thumbnail text-center"> <img style="margin-left:40px" onclick="change_image(this)" src="{%static 'app/images/table_size.jpg'%}" width="450"> </div>
+                            <div class="text-center p-4">
+                                <img id="main-image"  src="{{product.ImageURL}}" width="450" alt="Product Image" />
+                            </div>
+                              <div class="thumbnail text-center"> <img style="margin-left:40px"  src="{%static 'app/images/table_size.jpg'%}" width="450"> </div>
                           </div>
                       </div>
                       <div class="col-md-6">
@@ -33,16 +35,34 @@
                               <div class="d-flex justify-content-between align-items-center">
                                   <div class="d-flex align-items-center"><a style="text-decoration:none" href="{% url 'home'%}"> <i class="fa fa-long-arrow-left"></i><span class="ml-1">Back</span></a>  </div> <i class="fa fa-shopping-cart text-muted"></i>
                               </div>
-                              <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{product.shoe_type}}</span>
-                                  <h5 class="text-uppercase">{{product.name}}</h5>
-                                  <div class="price d-flex flex-row align-items-center"> <span class="act-price">{{product.price}}$</span>
-                                      
+                              <div class="mt-4 mb-3"> <span id="shoeType" class="text-uppercase text-muted brand">{{product.shoe_type}}</span>
+                                  <h5 id ="productName"class="text-uppercase">{{product.name}}</h5>
+                                  <div class="price d-flex flex-row align-items-center"> <span id="productPrice" class="act-price">{{product.price_avg}}$</span>  
                                   </div>
+                                  <p id ="detail" class="about">{{product.detail}}</p>
                               </div>
-                              <p class="about">{{product.detail}}</p>
                               <div class="sizes mt-5">
-                                  <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
-                              </div>
+                                <h6 class="text-uppercase">Size</h6>
+                                {% for size in sizes %}
+                                    
+                                    <label class="radio size-option" data-variant-id="{{ product_variant.id }}">
+                                        <input type="radio"  name="size" value="{{ size.id }}" checked>
+                                        <span>{{ size.name }}</span>
+                                    </label>
+                                  
+                                {% endfor %}
+                            
+                                <h6 class="text-uppercase">Color</h6>
+                                {% for color in colors %}
+                                    
+                                    <label class="radio color-option" data-variant-id="{{ product_variant.id }}">
+                                        <input type="radio" name="color" value="{{ color.id }}" checked>
+                                        <span>{{ color.name }}</span>
+                                    </label>
+                                     
+                                {% endfor %}
+
+                            </div>
                               <div class="cart mt-4 align-items-center"> <button data-product={{product.id}} data-action="add" class="btn btn-danger text-uppercase mr-2 px-4 add-btn update-cart" style="color: black; transition: color 0.1s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='black'">Add to cart</button> <i class="fa fa-heart text-muted"></i> </div>
                           </div>
                       </div>
@@ -51,7 +71,9 @@
           </div>
       </div>
   </div>
-  {% endfor %}
-  {% endblock detail %}
+<script src="{% static 'app/js/cart.js' %}"></script>
+{% endblock detail %}
 </body>
 </html>
+
+
