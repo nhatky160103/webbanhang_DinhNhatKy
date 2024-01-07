@@ -11,17 +11,20 @@
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
         </div>
-        <div class="carousel-inner">
+        <div class="carousel-inner"  >
           {% for product in products_slider  %}
             <div class="carousel-item {%  if forloop.first %}active{% endif %}" data-bs-interval="10000">
               <img src="{{product.ImageURL}}" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
+                
               <h5 class="text-white">{{product.name}}</h5>
               <p>{{product.detail}}</p>
               </div>
             </div>
           {% endfor %}
+          
         </div>
+        
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>

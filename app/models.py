@@ -8,8 +8,18 @@ from django import forms
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
-
+        fields = ['username','email', 'first_name', 'last_name','password1',  'password2']
+        
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control form-control-lg'}),
+            'username': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control form-control-lg'}),
+        }
+     
+        
 class loginUserForm(AuthenticationForm):
     class Meta:
         model = User

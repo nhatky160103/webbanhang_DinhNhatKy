@@ -15,5 +15,5 @@ urlpatterns = [
     path('contact/', views.contact_view, name="contact"),
     path('save_shipping_address/', views.save_shipping_address, name="save_shipping_address"),
     path('productvariant_api/',views.ProductvariantAPI.as_view(), name ="productvariant_api"),
-   
+     path('alert/', views.alert, name="alert"),
 ]

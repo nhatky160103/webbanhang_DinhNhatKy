@@ -20,7 +20,7 @@ class registerUser(View):
         rF = CreateUserForm()
         categories = Category.objects.filter(is_sub= False)
         active_category= request.GET.get('category','')
-        return render(request, 'app/register.html', {'categories':categories, 'active_category':active_category,'rF': rF})
+        return render(request, 'app/register2.html', {'categories':categories, 'active_category':active_category,'rF': rF})
 
     def post(self, request):
         rF = CreateUserForm(request.POST)
@@ -37,7 +37,8 @@ class registerUser(View):
         else:
             categories = Category.objects.filter(is_sub= False)
             active_category= request.GET.get('category','')
-            return render(request, 'app/register.html', {'categories':categories, 'active_category':active_category,'rF': rF})
+            return render(request, 'app/register2.html', {'categories':categories, 'active_category':active_category,'rF': rF})
+
 
 class loginUser(View):
    
@@ -184,7 +185,7 @@ def save_shipping_address(request):
                 phone_number=phone_number
             )
             shipping_address.save()
-            return redirect('checkout')
+            return redirect('alert')
     else:
         items = []
         cartItems=[]
@@ -192,11 +193,6 @@ def save_shipping_address(request):
         return redirect("login")
    
    
-
-
-
-
-
 def updateItem(request):
     data =json.loads(request.body)
     productvariant_id =data['productvariant_id']
@@ -213,9 +209,6 @@ def updateItem(request):
     if orderItem.quantity <= 0:
         orderItem.delete()
     return JsonResponse('added',safe=False)
-
-
-
 
 
 def detail(request):
