@@ -14,7 +14,7 @@
         <div class="carousel-inner"  >
           {% for product in products_slider  %}
             <div class="carousel-item {%  if forloop.first %}active{% endif %}" data-bs-interval="10000">
-              <img src="{{product.ImageURL}}" class="d-block w-100" alt="...">
+              <img style="max-height:650px" src="{{product.ImageURL}}" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block bg-dark text-white wid_hei">
                 
               <h5 class="text-white">{{product.name}}</h5>
