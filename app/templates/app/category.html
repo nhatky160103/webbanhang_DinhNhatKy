@@ -17,13 +17,15 @@
     <div class="row" style="width:100%">
         {%for product in products %}
         <div class="col-lg-3">
-          <img class="thumbnail" src="{{product.ImageURL}}">
+          <img class="thumbnail" style="width: 331px;" src="{{product.ImageURL}}">
           <div class="box-element product">
             <h6>{{product.name}}</h6>
             <hr>
-            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add cart</button>
+            <button data-product={{product.id}} class="btn btn-outline-secondary add-btn update-cart">
+              <a style="text-decoration:none" href="{% url 'detail'%}?id={{product.id}}">Buy</a>
+            </button>
             <a class="btn btn-outline-success" href="{% url 'detail'%}?id={{product.id}}">View</a>
-            <h4 style="display: inline-block; float: right"><strong>{{product.price | floatformat:2}}$</strong></h4>
+            <h4 style="display: inline-block; float: right"><strong>{{product.price_avg | floatformat:2}}$</strong></h4>
           </div>
         </div>  
         {% endfor %}  
